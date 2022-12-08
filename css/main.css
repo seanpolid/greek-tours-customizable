@@ -8,6 +8,25 @@
 
 @media screen {
 
+    /* For scaling */
+    .fontSize1 {font-size: 0.875rem;}
+    .fontSize2 {font-size: 1rem;}
+    .fontSize3 {font-size: 1.125rem;}
+    .fontSize4 {font-size: 1.25rem;}
+    .fontSize5 {font-size: 1.375rem;}
+    .fontSize6 {font-size: 1.4rem;}
+    .fontSize7 {font-size: 1.5rem;}
+    .fontSize8 {font-size: 1.6rem;}
+    .fontSize9 {font-size: 1.625rem;}
+    .fontSize10 {font-size: 1.65rem;}
+    .fontSize11 {font-size: 1.85rem;}
+    .fontSize12 {font-size: 2.1rem;}
+    .fontSize13 {font-size: 2.125rem;}
+    .fontSize14 {font-size: 2.25rem;}
+    .fontSize15 {font-size: 2.5rem;}
+    .fontSize16 {font-size: 2.75rem;}
+    .fontSize17 {font-size: 3rem;}
+
     /* General */
     .container {position: relative;}
     .image {background-position: top center; background-repeat: no-repeat; background-size: cover;}
