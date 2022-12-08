@@ -88,6 +88,10 @@ const customizer = {
 
     resizeFonts : function(event) {
         const newFontOption = customizer.getNewFontOption(event);
+        if (newFontOption == undefined || newFontOption === customizer.currentFontOption) {
+            return;
+        }
+ 
         const selector = "h1[class*=fontSize], a[class*=fontSize], p[class*=fontSize], body";
         const elementsToAdjust = document.querySelectorAll(selector);
         for (const element of elementsToAdjust) {
@@ -112,7 +116,6 @@ const customizer = {
 
     getCurrentStyle : function(element) {
         for (const style of element.classList) {
-            console.log(typeof style);
             if (style.includes("fontSize")) {
                 return style;
             }
