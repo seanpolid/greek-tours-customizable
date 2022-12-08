@@ -2,20 +2,29 @@
 
 const customizer = {
 
-    fontSizeScalingMatrix : [[0.875, 1, 1.25],
-                            [1, 1.25, 1.5],
-                            [1.125, 1.4, 1.65],
-                            [1.375, 1.6, 1.85],
-                            [1.625, 1.85, 2.1],
-                            [2.125, 2.25, 2.5],
-                            [2.5, 2.75, 3]],
+    fontSizeScalingMatrix : [],
     uniqueFontSizes : [],
     currentFontOption : 0, // 0, 1, 2 = small, medium, large
     currentTheme : "light",
 
     init : function() {
+        this.fontSizeScalingMatrix = this.getFontSizeScalingMatrix();
         this.uniqueFontSizes = this.getUniqueFontSizes();
         this.createControls();
+    },
+
+    getFontSizeScalingMatrix : function() {
+        /* This defines how font sizes (specified in rem) increase or decrease
+            based on the current font option (small, medium or large). Each unique
+            font size should have a corresponding class in main.css */
+        const matrix = [[0.875, 1, 1.25],
+                        [1, 1.25, 1.5],
+                        [1.125, 1.4, 1.65],
+                        [1.375, 1.6, 1.85],
+                        [1.625, 1.85, 2.1],
+                        [2.125, 2.25, 2.5],
+                        [2.5, 2.75, 3]]
+        return matrix;
     },
 
     getUniqueFontSizes : function() {
@@ -34,9 +43,10 @@ const customizer = {
         const header = document.getElementsByTagName("header")[0];
         const optionsContainer = document.createElement("div");
         optionsContainer.classList.add("optionsContainer");
+        optionsContainer.setAttribute("aria-hidden", "true");
+
         const themeOption = this.createThemeOption();
         const fontSizeOptions = this.createFontSizeOptions();
-
         optionsContainer.append(themeOption, fontSizeOptions);
         mainContainer.insertBefore(optionsContainer, header);
     },

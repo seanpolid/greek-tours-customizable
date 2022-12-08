@@ -8,7 +8,7 @@
 
 @media screen {
 
-    /* For scaling */
+    /* For scaling ; font-size and class name need to occur in ascending order */
     .fontSize1 {font-size: 0.875rem;}
     .fontSize2 {font-size: 1rem;}
     .fontSize3 {font-size: 1.125rem;}
