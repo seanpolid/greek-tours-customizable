@@ -24,13 +24,13 @@ const customizer = {
                 allFontSizes.push(fontSize);
             }
         }
-        return new Set(allFontSizes.sort());
+        const uniqueFontSizes = new Set(allFontSizes.sort());
+        return Array.from(uniqueFontSizes);
     },
 
     createControls : function() {
         const mainContainer = document.querySelector("container");
         const optionsContainer = document.createElement("div");
-        
         const themeOption = this.createThemeOption();
         const fontSizeOptions = this.createFontSizeOptions();
 
@@ -53,7 +53,7 @@ const customizer = {
         } else {
             newTheme = "light";
         }
-        const elementsToAdjust = document.querySelectorAll(`class^=${this.currentTheme}`)
+        const elementsToAdjust = document.querySelectorAll(`class*=${this.currentTheme}`)
         for (const element of elementsToAdjust) {
             element.classList.remove(this.currentTheme);
             element.classList.add(newTheme);
@@ -79,14 +79,14 @@ const customizer = {
     },
 
     scaleAllFonts : function(newFontScale) {
-        const elementsToAdjust = document.querySelectorAll("class^=fontSize");
+        const elementsToAdjust = document.querySelectorAll("class*=fontSize");
         for (const element of elementsToAdjust) {
             const currentStyle = this.getCurrentStyle(element);
             const newStyle = this.getNewStyle(currentStyle, newFontScale);
             element.classList.remove(currentStyle);
             element.classList.add(newStyle);
         }
-        this.prevScaleFactor = newFontScale;
+        this.currentFontScale = newFontScale;
     },
 
     getCurrentStyle : function(element) {
@@ -103,23 +103,21 @@ const customizer = {
         return this.convertToStyle(nextFontSize);
     },
 
+    findCurrentFontSize : function(currentSize) {
+        const fontSizeIndex = parseInt(currentSize.split("fontSize")[1]) - 1;
+        return this.uniqueFontSizes[fontSizeIndex];
+    },
+
     findNextFontSize : function(currentFontSize, newFontScale) {
-        const scaleDirection = newFontScale - this.currentFontScale;
-        const nextFontSizeIndex = this.currentFontScale + scaleDirection;
         for (const row of this.fontSizeScalingMatrix) {
             if (row[this.currentFontScale] === currentFontSize) {
-                return row[nextFontSizeIndex];
+                return row[newFontScale];
             }
         }
     },
 
-    findCurrentFontSize : function(currentSize) {
-        const fontSizeIndex = parseInt(currentSize.split("fontSize")[1]) - 1;
-        return Array.from(this.uniqueFontSizes)[fontSizeIndex];
-    },
-
     convertToStyle : function(nextFontSize) {
-        const fontSizeIndex = Array.from(this.uniqueFontSizes).indexOf(nextFontSize);
+        const fontSizeIndex = this.uniqueFontSizes.indexOf(nextFontSize);
         return `fontSize${fontSizeIndex + 1}`;
     }
     
