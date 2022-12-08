@@ -42,8 +42,9 @@ const customizer = {
     },
 
     createThemeOption : function() {
-        const themeOption = document.createElement("div");
-        themeOption.appendChild(document.createTextNode("Dark Theme"));
+        const themeOption = document.createElement("input");
+        themeOption.setAttribute("type", "button");
+        themeOption.setAttribute("value", "Dark Theme");
         themeOption.addEventListener('click', this.changeTheme, false);
         themeOption.classList.add("themeOption");
         return themeOption;
@@ -65,68 +66,80 @@ const customizer = {
     },
 
     createFontSizeOptions : function() {
-        let fontSizeOptions = document.createElement("div");
-        let smallFontOption = document.createElement("div");
-        let mediumFontOption = document.createElement("div");
-        let largeFontOption = document.createElement("div");
+        let fontSizeOptions = document.createElement("ul");
+        fontSizeOptions.classList.add("fontSizeOptions")
+        let smallFontOption = document.createElement("a");
+        let mediumFontOption = document.createElement("a");
+        let largeFontOption = document.createElement("a");
 
         smallFontOption.appendChild(document.createTextNode("A"));
         mediumFontOption.appendChild(document.createTextNode("A"));
         largeFontOption.appendChild(document.createTextNode("A"));
 
-        smallFontOption.addEventListener('click', this.resizeFonts(0), false);
-        mediumFontOption.addEventListener('click', this.resizeFonts(1), false);
-        largeFontOption.addEventListener('click', this.resizeFonts(2), false);
+        smallFontOption.classList.add(this.convertToStyle(0.875), "smallFontOption");
+        mediumFontOption.classList.add(this.convertToStyle(1), "mediumFontOption");
+        largeFontOption.classList.add(this.convertToStyle(1.125), "largeFontOption");
 
-        smallFontOption.classList.add("smallFontOption");
-        mediumFontOption.classList.add("mediumFontOption");
-        largeFontOption.classList.add("largeFontOption");
+        fontSizeOptions.addEventListener('click', this.resizeFonts, false);
     
         fontSizeOptions.append(smallFontOption, mediumFontOption, largeFontOption);
         return fontSizeOptions;
     },
 
-    resizeFonts : function(newFontOption) {
-        console.log("scaling fonts");
-        const elementsToAdjust = document.querySelectorAll("h1[class*=fontSize], a[class*=fontSize], p[class*=fontSize]");
+    resizeFonts : function(event) {
+        const newFontOption = customizer.getNewFontOption(event);
+        const selector = "h1[class*=fontSize], a[class*=fontSize], p[class*=fontSize], body";
+        const elementsToAdjust = document.querySelectorAll(selector);
         for (const element of elementsToAdjust) {
-            const currentStyle = this.getCurrentStyle(element);
-            const newStyle = this.getNewStyle(currentStyle, newFontOption);
+            const currentStyle = customizer.getCurrentStyle(element);
+            const newStyle = customizer.getNewStyle(currentStyle, newFontOption);
             element.classList.remove(currentStyle);
             element.classList.add(newStyle);
         }
-        this.currentFontOption = newFontOption;
+        customizer.currentFontOption = newFontOption;
+    },
+
+    getNewFontOption : function(event) {
+        const targetClassList = event.target.classList;
+        if (targetClassList.contains("smallFontOption")) {
+            return 0;
+        } else if (targetClassList.contains("mediumFontOption")) {
+            return 1;
+        } else if (targetClassList.contains("largeFontOption")) {
+            return 2;
+        }
     },
 
     getCurrentStyle : function(element) {
         for (const style of element.classList) {
-            if (style.contains("fontSize")) {
+            console.log(typeof style);
+            if (style.includes("fontSize")) {
                 return style;
             }
         }
     },
 
     getNewStyle : function(currentStyle, newFontOption) {
-        const currentFontSize = this.findCurrentFontSize(currentStyle);
-        const nextFontSize = this.findNextFontSize(currentFontSize, newFontOption);
-        return this.convertToStyle(nextFontSize);
+        const currentFontSize = customizer.findCurrentFontSize(currentStyle);
+        const nextFontSize = customizer.findNextFontSize(currentFontSize, newFontOption);
+        return customizer.convertToStyle(nextFontSize);
     },
 
     findCurrentFontSize : function(currentSize) {
         const fontSizeIndex = parseInt(currentSize.split("fontSize")[1]) - 1;
-        return this.uniqueFontSizes[fontSizeIndex];
+        return customizer.uniqueFontSizes[fontSizeIndex];
     },
 
     findNextFontSize : function(currentFontSize, newFontOption) {
-        for (const row of this.fontSizeScalingMatrix) {
-            if (row[this.currentFontOption] === currentFontSize) {
+        for (const row of customizer.fontSizeScalingMatrix) {
+            if (row[customizer.currentFontOption] === currentFontSize) {
                 return row[newFontOption];
             }
         }
     },
 
     convertToStyle : function(nextFontSize) {
-        const fontSizeIndex = this.uniqueFontSizes.indexOf(nextFontSize);
+        const fontSizeIndex = customizer.uniqueFontSizes.indexOf(nextFontSize);
         return `fontSize${fontSizeIndex + 1}`;
     }
     
