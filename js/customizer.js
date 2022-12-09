@@ -15,8 +15,7 @@ const customizer = {
 
     getFontSizeScalingMatrix : function() {
         /* This defines how font sizes (specified in rem) increase or decrease
-            based on the current font option (small, medium or large). Each unique
-            font size should have a corresponding class in main.css */
+            based on the current font option (currentFontOption == col) */
         const matrix = [[0.875, 1, 1.25],
                         [1, 1.25, 1.5],
                         [1.125, 1.4, 1.65],
@@ -28,6 +27,9 @@ const customizer = {
     },
 
     getUniqueFontSizes : function() {
+        /* Creates a sorted array (asc) of unique font sizes where the index + 1 
+            corresponds to a given class in main.css. 
+            Ex: .fontSize1 == uniqueFontSizes[0] */
         let allFontSizes = [];
         for (const row of this.fontSizeScalingMatrix) {
             for (const fontSize of row) {
@@ -56,28 +58,30 @@ const customizer = {
         themeOption.setAttribute("type", "button");
         themeOption.setAttribute("value", "Dark Theme");
         themeOption.addEventListener('click', this.changeTheme, false);
-        themeOption.classList.add("themeOption");
+        themeOption.classList.add("themeOption", "fontSize1");
         return themeOption;
     },
 
     changeTheme : function() {
         console.log("Changing theme");
         let newTheme;
-        if (this.currentTheme === 'light') {
+        if (customizer.currentTheme === 'light') {
             newTheme = "dark";
         } else {
             newTheme = "light";
         }
-        const elementsToAdjust = document.querySelectorAll(`body`)
-        for (const element of elementsToAdjust) {
-            element.classList.remove(this.currentTheme);
+        const elementsToAdjust = document.querySelectorAll("[class*=light], [class*=dark]");
+        for (let element of elementsToAdjust) {
+            element.classList.remove(customizer.currentTheme);
             element.classList.add(newTheme);
         }
+        customizer.currentTheme = newTheme;
     },
 
     createFontSizeOptions : function() {
         let fontSizeOptions = document.createElement("ul");
         fontSizeOptions.classList.add("fontSizeOptions")
+
         let smallFontOption = document.createElement("a");
         let mediumFontOption = document.createElement("a");
         let largeFontOption = document.createElement("a");
@@ -89,6 +93,10 @@ const customizer = {
         smallFontOption.classList.add(this.convertToStyle(0.875), "smallFontOption");
         mediumFontOption.classList.add(this.convertToStyle(1), "mediumFontOption");
         largeFontOption.classList.add(this.convertToStyle(1.125), "largeFontOption");
+
+        smallFontOption.setAttribute("title", "Regular Text Size");
+        mediumFontOption.setAttribute("title", "Larger Text Size");
+        largeFontOption.setAttribute("title", "Largest Text Size");
 
         fontSizeOptions.addEventListener('click', this.resizeFonts, false);
     
@@ -102,13 +110,14 @@ const customizer = {
             return;
         }
  
-        const selector = "h1[class*=fontSize], a[class*=fontSize], p[class*=fontSize], body";
-        const elementsToAdjust = document.querySelectorAll(selector);
+        const elementsToAdjust = document.querySelectorAll("[class*=fontSize]");
         for (const element of elementsToAdjust) {
             const currentStyle = customizer.getCurrentStyle(element);
-            const newStyle = customizer.getNewStyle(currentStyle, newFontOption);
-            element.classList.remove(currentStyle);
-            element.classList.add(newStyle);
+            if (currentStyle) {
+                const newStyle = customizer.getNewStyle(currentStyle, newFontOption);
+                element.classList.remove(currentStyle);
+                element.classList.add(newStyle);
+            } 
         }
         customizer.currentFontOption = newFontOption;
     },
@@ -121,15 +130,16 @@ const customizer = {
             return 1;
         } else if (targetClassList.contains("largeFontOption")) {
             return 2;
-        }
+        } 
     },
 
     getCurrentStyle : function(element) {
         for (const style of element.classList) {
-            if (style.includes("fontSize")) {
+            if (style.includes("fontSize") && !style.includes("fontSizeOptions")) {
                 return style;
             }
         }
+        return undefined;
     },
 
     getNewStyle : function(currentStyle, newFontOption) {
