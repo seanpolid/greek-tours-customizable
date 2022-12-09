@@ -100,7 +100,9 @@
 
 }
 
-@media screen and (max-width: 1018px) {
+@media screen and (max-width: 1010px) {
+
+    .themeOption {display: none;}
 
     /* General */
     .container {width: 100%;}
@@ -133,6 +135,8 @@
 
 
 @media screen and (max-width: 600px) {
+
+    .optionsContainer {display: none;}
 
     /* General */
     .tours, .travelSmart, footer {padding-top: 50px; padding-bottom: 50px;}

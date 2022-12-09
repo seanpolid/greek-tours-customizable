@@ -74,6 +74,7 @@ const customizer = {
             newValue = "Dark Theme";
         }
         document.querySelector(".themeOption").setAttribute("value", newValue);
+        
         const elementsToAdjust = document.querySelectorAll("[class*=light], [class*=dark]");
         for (let element of elementsToAdjust) {
             element.classList.remove(customizer.currentTheme);
