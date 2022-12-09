@@ -39,6 +39,8 @@
     .lightColor1 {color: #000;}
     .lightColor2 {color: #666;}
     .dark {background: #000; color: #fff;}
+    .dark footer ul a:hover, .dark footer ul a:focus {color: #ccc;}
+    .dark #emailButton:hover, .dark #emailButton:focus {background: #ccc; color: #000;}
 
     /* General */
     .container {position: relative;}
