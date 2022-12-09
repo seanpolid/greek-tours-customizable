@@ -65,11 +65,15 @@ const customizer = {
     changeTheme : function() {
         console.log("Changing theme");
         let newTheme;
+        let newValue;
         if (customizer.currentTheme === 'light') {
             newTheme = "dark";
+            newValue = "Light Theme";
         } else {
             newTheme = "light";
+            newValue = "Dark Theme";
         }
+        document.querySelector(".themeOption").setAttribute("value", newValue);
         const elementsToAdjust = document.querySelectorAll("[class*=light], [class*=dark]");
         for (let element of elementsToAdjust) {
             element.classList.remove(customizer.currentTheme);
