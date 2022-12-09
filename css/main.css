@@ -1,6 +1,6 @@
 @media all {
 
-    body {font: 400 14px/1.3 'Roboto', sans-serif; color: #000; margin: 0; padding: 0;}
+    body {font-weight: 400; line-height: 1.3; font-family: 'Roboto', sans-serif; color: #000; margin: 0; padding: 0;}
     .container {width: 1000px; margin: 0 auto;}
 
 }
@@ -28,14 +28,19 @@
     .fontSize17 {font-size: 3rem;}
 
     .optionsContainer {position: absolute; top: 0; right: 0; display: flex; padding: 10px; background: rgba(255, 255, 255, 0.5); gap: 10px;}
-    .themeOption {padding: 0 10px;}
+    .themeOption {padding: 11px 13px; cursor: pointer; border-radius: 0; background: #fff; border: 0; line-height: 1.3; font-family: 'Roboto', sans-serif;}
     .fontSizeOptions {display: flex; padding: 0; margin: 0; gap: 10px; justify-content: space-between; align-items: center;}
+    .fontSizeOptions a {padding: 0 5px; color: #000;}
+    .fontSizeOptions a:hover, .fontSizeOptions a:focus {outline: 2px solid #000; cursor: pointer;}
+
+    .light {background: #fff;}
+    .dark {background: #000; color: #fff;}
 
     /* General */
     .container {position: relative;}
     .image {background-position: top center; background-repeat: no-repeat; background-size: cover;}
     a {text-decoration: none;}
-    a:focus {outline: 2px dotted #000; outline-offset: 5px;}
+    a:focus, .fontSizeOptions a:focus {outline: 2px dotted #000; outline-offset: 5px;}
     input:focus {outline: 2px solid #000;}
     #jump {position: absolute; top: 10px; left: 85px; font-size: 0; color: white; text-decoration: underline;}
     #jump:focus {font-size: inherit; outline-color: #fff;}
@@ -44,9 +49,9 @@
     header {background-image: url(../layout2-assets/hero-image-greece.webp); min-height: 527px;}
     #logo {background-image: url(../layout2-assets/go-greek-tours.png); min-height: 92px; width: 107px; position: absolute; left: 10px; top: 10px;}
     #logo:focus {outline-color: #fff;}
-    header h1 {font: 40px/1.3 'Roboto Slab', serif; color: #00214f; margin: 0 auto; position: relative; top: 320px; width: 90%; text-align: center;}
+    header h1 {font-weight: 400; line-height: 1.3; font-family: 'Roboto Slab', serif; color: #00214f; margin: 0 auto; position: relative; top: 320px; width: 90%; text-align: center;}
     header form {position: relative; top: 330px; width: 100%; display: flex; justify-content: center;}
-    #searchField, #searchButton {font: 16px/1.3 'Roboto Slab', serif; border-radius: 0; border: 0; height: 40px;}
+    #searchField, #searchButton {font-weight: 400; line-height: 1.3; font-family: 'Roboto Slab', serif; border-radius: 0; border: 0; height: 40px;}
     #searchField {top: 10px; width: 36%; padding: 0 10px; box-sizing: border-box;}
     #searchButton {padding: 0 30px; background: #00214F; color: #fff; cursor: pointer;}
     #searchButton:focus {outline-color: #fff;}
@@ -58,30 +63,29 @@
     #greekHistoryPhoto {background-image: url(../layout2-assets/greek-history.webp);}
     #santoriniPhoto {background-image: url(../layout2-assets/santorini.webp);}
     #monasteryPhoto {background-image: url(../layout2-assets/greek-monastery.webp);}
-    .tours h2 {color: #666; font: 700 16px/1.3 'Roboto Slab', serif; margin-top: 24px;}
-    .tours p {padding: 0 19px; margin: 0 0 15px;}
+    .tours h2 {color: #666; font-weight: 700; line-height: 1.3; font-family: 'Roboto Slab', serif; margin-top: 24px;}
+    .tours p {padding: 0 19px; margin: 0 0 15px; color: #000;}
     .tours img {width: 19px; height: 19px;}
     .tours a[aria-label*="Read more"] {display: block; width: fit-content; margin: 0 auto;}
 
     /* Quote */
-    .quote blockquote {color: #666; font: 700 34px/1.3 'Arima Madurai'; width: 80%; padding: 80px 0; text-align: center; margin: 0 auto;}
-    .quote span {font-size: 18px;}
+    .quote blockquote {color: #666; font-weight: 700; line-height: 1.3; font-family: 'Arima Madurai'; width: 80%; padding: 80px 0; text-align: center; margin: 0 auto;}
 
     /* Explore cafe culture */
     .exploreCafe {background-image: url(../layout2-assets/cafe-culture.webp); min-height: 543px; position: relative;}
     .exploreCafe a {background: #987B31; padding: 20px 0; position: absolute; top: 220px; right: 80px; text-align: center; width: 200px;}
-    .exploreCafe a h2 {color: #fff; font: 400 26px/1.3 'Arima Madurai', cursive; margin: 0;}
+    .exploreCafe a h2 {color: #fff; font-weight: 400; line-height: 1.3; font-family: 'Arima Madurai', cursive; margin: 0;}
     .exploreCafe a:hover, .exploreCafe a:focus {background: #000;}
 
     /* Travel smart */
     .travelSmart {display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 30px 15px; background: #448CCB; padding: 80px 110px;}
-    .travelSmart h2 {grid-column: 1 / 5; color: #fff; font: 400 34px/1.3 'Roboto Slab', serif; margin: 0;}
-    .travelSmart a {padding: 40px; color: #1D6BAE; font-size: 22px; background: #fff; text-align: center;}
+    .travelSmart h2 {grid-column: 1 / 5; color: #fff; font-weight: 400; line-height: 1.3; font-family: 'Roboto Slab', serif; margin: 0;}
+    .travelSmart a {padding: 40px; color: #1D6BAE; font-size: inherit; background: #fff; text-align: center;}
     .travelSmart a:hover, .travelSmart a:focus {background: #000; color: #fff;}
 
     /* Footer */
     footer {display: grid; grid-template-columns: 1.5fr 2fr 1fr; padding: 80px 110px;}
-    footer h2 {color: #666; font: 400 22px/1.3 'Arima Madurai', cursive; margin: 0 0 0.5em;}
+    footer h2 {color: #666; font-weight: 400; line-height: 1.3; font-family: 'Arima Madurai', cursive; margin: 0 0 0.5em;}
     footer ul {list-style-type: none; padding: 0; margin: 0;}
     footer li {margin-bottom: 1em;}
     footer ul a {color: #666;}
