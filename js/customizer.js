@@ -92,6 +92,8 @@ const customizer = {
         const mediumFontOption = customizer.createFontSizeOption('Larger Text Size', 'mediumFontOption', 1);
         const largeFontOption = customizer.createFontSizeOption('Largest Text Size', 'largeFontOption', 1.125);
 
+        smallFontOption.classList.add("selected");
+
         fontSizeOptions.addEventListener('click', this.selectFontSizeOption, false);
         fontSizeOptions.addEventListener('click', this.resizeFonts, false);
         fontSizeOptions.append(smallFontOption, mediumFontOption, largeFontOption);
