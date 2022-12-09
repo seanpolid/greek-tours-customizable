@@ -43,12 +43,14 @@ const customizer = {
     createControls : function() {
         const mainContainer = document.querySelector(".container");
         const header = document.getElementsByTagName("header")[0];
+
         const optionsContainer = document.createElement("div");
         optionsContainer.classList.add("optionsContainer");
         optionsContainer.setAttribute("aria-hidden", "true");
 
         const themeOption = this.createThemeOption();
         const fontSizeOptions = this.createFontSizeOptions();
+        
         optionsContainer.append(themeOption, fontSizeOptions);
         mainContainer.insertBefore(optionsContainer, header);
     },
@@ -64,8 +66,7 @@ const customizer = {
 
     changeTheme : function() {
         console.log("Changing theme");
-        let newTheme;
-        let newValue;
+        let newTheme, newValue;
         if (customizer.currentTheme === 'light') {
             newTheme = "dark";
             newValue = "Light Theme";
@@ -84,29 +85,38 @@ const customizer = {
     },
 
     createFontSizeOptions : function() {
-        let fontSizeOptions = document.createElement("ul");
+        let fontSizeOptions = document.createElement("div");
         fontSizeOptions.classList.add("fontSizeOptions")
 
-        let smallFontOption = document.createElement("a");
-        let mediumFontOption = document.createElement("a");
-        let largeFontOption = document.createElement("a");
+        const smallFontOption = customizer.createFontSizeOption('Regular Text Size', 'smallFontOption', 0.875);
+        const mediumFontOption = customizer.createFontSizeOption('Larger Text Size', 'mediumFontOption', 1);
+        const largeFontOption = customizer.createFontSizeOption('Largest Text Size', 'largeFontOption', 1.125);
 
-        smallFontOption.appendChild(document.createTextNode("A"));
-        mediumFontOption.appendChild(document.createTextNode("A"));
-        largeFontOption.appendChild(document.createTextNode("A"));
-
-        smallFontOption.classList.add(this.convertToStyle(0.875), "smallFontOption");
-        mediumFontOption.classList.add(this.convertToStyle(1), "mediumFontOption");
-        largeFontOption.classList.add(this.convertToStyle(1.125), "largeFontOption");
-
-        smallFontOption.setAttribute("title", "Regular Text Size");
-        mediumFontOption.setAttribute("title", "Larger Text Size");
-        largeFontOption.setAttribute("title", "Largest Text Size");
-
+        fontSizeOptions.addEventListener('click', this.selectFontSizeOption, false);
         fontSizeOptions.addEventListener('click', this.resizeFonts, false);
-    
         fontSizeOptions.append(smallFontOption, mediumFontOption, largeFontOption);
         return fontSizeOptions;
+    },
+
+    createFontSizeOption : function(title, classIdentifier, fontSize) {
+        let fontSizeOption = document.createElement("a");
+        fontSizeOption.appendChild(document.createTextNode("A"));
+        fontSizeOption.setAttribute("href", "#");
+        fontSizeOption.classList.add(this.convertToStyle(fontSize), classIdentifier);
+        fontSizeOption.addEventListener('click', event => {
+            event.preventDefault();
+        }, false);
+        return fontSizeOption;
+    },
+
+    selectFontSizeOption : function(event) {
+        const selectedFontSizeOption = document.querySelector(".selected");
+        if (selectedFontSizeOption) {
+            selectedFontSizeOption.classList.remove("selected");
+        }
+        if (customizer.getNewFontOption(event) !== undefined) {
+            event.target.classList.add("selected");
+        }
     },
 
     resizeFonts : function(event) {
