@@ -95,7 +95,6 @@ const customizer = {
     resizeFonts : function(event) {
         const currentFontSize = customizer.currentFontSize;
         const newFontSize = customizer.getNewFontSize(event);
-        console.log(newFontSize);
         if (newFontSize == undefined || newFontSize === currentFontSize) {
             return;
         }
