@@ -17,26 +17,32 @@
     #jump {position: absolute; top: 10px; left: 85px; font-size: 0; color: white; text-decoration: underline;}
     #jump:focus {font-size: inherit; outline-color: #fff;}
 
-    /* Font scaling */
-    body[class*="regular"], .themeOption[class*="regular"], .regularFontOption[class~="regular"] {font-size: 0.875rem;}
-    body[class*="larger"], .themeOption[class*="larger"], .regularFontOption[class~="larger"] {font-size: 1rem;}
-    body[class*="largest"], .themeOption[class*="largest"], .regularFontOption[class~="largest"] {font-size: 1.25rem;}
+    /* Regular font */
+    .regular {font-size: 0.875rem;}
+    .regular header form, .regular .tours h2, .regular .largerFontOption {font-size: 1rem;}
+    .regular h1 {font-size: 2.5rem;}
+    .regular .exploreCafe h2 {font-size: 1.625rem;}
+    .regular .quote span, .regular .largestFontOption {font-size: 1.125rem;}
+    .regular .quote, .regular .travelSmart h2 {font-size: 2.125rem;}
+    .regular .travelSmart a, .regular .mailList h2 {font-size: 1.375rem;}
 
-    header form .regular, .mainContent .regular, .largerFontOption[class~="regular"] {font-size: 1rem;}
-    header form .larger, .mainContent .larger, .largerFontOption[class~="larger"] {font-size: 1.25rem;}
-    header form .largest, .mainContent .largest, .largerFontOption[class~="largest"] {font-size: 1.5rem;}
+    /* Larger font */
+    .larger {font-size: 1rem;}
+    .larger header form, .larger .tours h2, .larger .largerFontOption {font-size: 1.25rem;}
+    .larger h1 {font-size: 2.75rem;}
+    .larger .exploreCafe h2 {font-size: 1.85rem;}
+    .larger .quote span, .larger  .largestFontOption {font-size: 1.4rem;}
+    .larger .quote, .larger .travelSmart h2 {font-size: 2.25rem;}
+    .larger .travelSmart a, .larger .mailList h2 {font-size: 1.6rem;}
 
-    .quote span[class*="regular"], .largestFontOption[class~="regular"] {font-size: 1.125rem;}
-    .quote span[class*="larger"], .largestFontOption[class~="larger"] {font-size: 1.4rem;}
-    .quote span[class*="largest"], .largestFontOption[class~="largest"] {font-size: 1.65rem;}
-
-    .quote .regular, .travelSmart h2[class*="regular"] {font-size: 2.125rem;}
-    .quote .larger, .travelSmart h2[class*="larger"] {font-size: 2.25rem;}
-    .quote .largest, .travelSmart h2[class*="largest"] {font-size: 2.5rem;}
-
-    .travelSmart[class*="regular"], .mailList .regular {font-size: 1.375rem;}
-    .travelSmart[class*="larger"], .mailList .larger {font-size: 1.6rem;}
-    .travelSmart[class*="largest"], .mailList .largest {font-size: 1.85rem;}
+    /* Largest font */
+    .largest {font-size: 1.25rem;}
+    .largest header form, .largest .tours h2, .largest .largerFontOption {font-size: 1.5rem;}
+    .largest h1{font-size: 3rem;}
+    .largest .exploreCafe h2 {font-size: 2.1rem;}
+    .largest .quote span, .largest .largestFontOption {font-size: 1.65rem;}
+    .largest .quote, .largest .travelSmart h2 {font-size: 2.5rem;}
+    .largest .travelSmart a, .largest .mailList h2 {font-size: 1.85rem;}
 
     /* Color theme */
     .light {background: #fff;}
@@ -48,6 +54,7 @@
 
     /* Theme & font-size option containers */
     .optionsContainer {position: absolute; top: 0; right: 0; display: flex; padding: 10px; background: rgba(255, 255, 255, 0.5); gap: 10px;}
+    .themeOption, .regularFontOption {font-size: inherit;}
     .themeOption {padding: 11px 13px; cursor: pointer; border-radius: 0; background: #fff; border: 0; line-height: 1.3; font-family: 'Roboto', sans-serif;}
     .themeOption:hover, .themeOption:focus {color: #fff; background: #000;}
     .fontSizeOptions {display: flex; padding: 0; margin: 0; gap: 10px; justify-content: space-between; align-items: center;}
@@ -60,10 +67,9 @@
     #logo {background-image: url(../layout2-assets/go-greek-tours.png); min-height: 92px; width: 107px; position: absolute; left: 10px; top: 10px;}
     #logo:focus {outline-color: #fff;}
     header h1 {font-weight: 400; line-height: 1.3; font-family: 'Roboto Slab', serif; color: #00214f; margin: 0 auto; position: relative; top: 320px; width: 90%; text-align: center;}
-    header h1[class*="regular"] {font-size: 2.5rem;}
-    header h1[class*="larger"] {font-size: 2.75rem;}
-    header h1[class*="largest"] {font-size: 3rem;}
+    
     header form {position: relative; top: 330px; width: 100%; display: flex; justify-content: center;}
+    header form input {font-size: inherit;}
     #searchField, #searchButton {font-weight: 400; line-height: 1.3; font-family: 'Roboto Slab', serif; border-radius: 0; border: 0; height: 40px;}
     #searchField {top: 10px; width: 36%; padding: 0 10px; box-sizing: border-box;}
     #searchButton {padding: 0 30px; background: #00214F; color: #fff; cursor: pointer;}
@@ -86,9 +92,7 @@
 
     /* Explore cafe culture */
     .exploreCafe {background-image: url(../layout2-assets/cafe-culture.webp); min-height: 543px; position: relative;}
-    .exploreCafe .regular {font-size: 1.625rem;}
-    .exploreCafe .larger {font-size: 1.85rem;}
-    .exploreCafe .largest {font-size: 2.1rem;}
+    
     .exploreCafe a {background: #987B31; padding: 20px 0; position: absolute; top: 220px; right: 80px; text-align: center; width: 200px;}
     .exploreCafe a h2 {color: #fff; font-weight: 400; line-height: 1.3; font-family: 'Arima Madurai', cursive; margin: 0;}
     .exploreCafe a:hover, .exploreCafe a:focus {background: #000;}

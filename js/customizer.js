@@ -29,7 +29,7 @@ const customizer = {
         themeOption.setAttribute("type", "button");
         themeOption.setAttribute("value", "Dark Theme");
         themeOption.addEventListener('click', this.changeTheme, false);
-        themeOption.classList.add("themeOption", "regular");
+        themeOption.classList.add("themeOption");
         return themeOption;
     },
 
@@ -74,7 +74,7 @@ const customizer = {
         fontSizeOption.appendChild(document.createTextNode("A"));
         fontSizeOption.setAttribute("href", "#");
         fontSizeOption.setAttribute("title", title);
-        fontSizeOption.classList.add(classIdentifier, "regular");
+        fontSizeOption.classList.add(classIdentifier);
         fontSizeOption.addEventListener('click', event => {
             event.preventDefault();
         }, false);
@@ -98,11 +98,9 @@ const customizer = {
             return;
         }
  
-        const elementsToAdjust = document.querySelectorAll(`.${currentFontSize}`);
-        for (const element of elementsToAdjust) {
-            element.classList.remove(currentFontSize);
-            element.classList.add(newFontSize);
-        }
+        const elementToAdjust = document.querySelector(`.${currentFontSize}`);
+        elementToAdjust.classList.remove(currentFontSize);
+        elementToAdjust.classList.add(newFontSize);
         customizer.currentFontSize = newFontSize;
     },
 
