@@ -8,24 +8,34 @@
 
 @media screen {
 
-    /* For scaling ; font-size and class name need to occur in ascending order */
-    .fontSize1 {font-size: 0.875rem;}
-    .fontSize2 {font-size: 1rem;}
-    .fontSize3 {font-size: 1.125rem;}
-    .fontSize4 {font-size: 1.25rem;}
-    .fontSize5 {font-size: 1.375rem;}
-    .fontSize6 {font-size: 1.4rem;}
-    .fontSize7 {font-size: 1.5rem;}
-    .fontSize8 {font-size: 1.6rem;}
-    .fontSize9 {font-size: 1.625rem;}
-    .fontSize10 {font-size: 1.65rem;}
-    .fontSize11 {font-size: 1.85rem;}
-    .fontSize12 {font-size: 2.1rem;}
-    .fontSize13 {font-size: 2.125rem;}
-    .fontSize14 {font-size: 2.25rem;}
-    .fontSize15 {font-size: 2.5rem;}
-    .fontSize16 {font-size: 2.75rem;}
-    .fontSize17 {font-size: 3rem;}
+    /* For scaling */
+    body[class*="regular"] {font-size: 0.875rem;}
+    body[class*="larger"] {font-size: 1rem;}
+    body[class*="largest"] {font-size: 1.25rem;}
+
+    header h1[class*="regular"] {font-size: 2.5rem;}
+    header h1[class*="larger"] {font-size: 2.75rem;}
+    header h1[class*="largest"] {font-size: 3rem;}
+
+    header form .regular, .mainContent .regular {font-size: 1rem;}
+    header form .larger, .mainContent .larger {font-size: 1.25rem;}
+    header form .largest, .mainContent .largest {font-size: 1.5rem;}
+
+    .exploreCafe .regular {font-size: 1.625rem;}
+    .exploreCafe .larger {font-size: 1.85rem;}
+    .exploreCafe .largest {font-size: 2.1rem;}
+
+    .quote .regular, .travelSmart h2[class*="regular"] {font-size: 2.125rem;}
+    .quote .larger, .travelSmart h2[class*="larger"] {font-size: 2.25rem;}
+    .quote .largest, .travelSmart h2[class*="largest"] {font-size: 2.5rem;}
+
+    .travelSmart[class*="regular"], .mailList .regular {font-size: 1.375rem;}
+    .travelSmart[class*="larger"], .mailList .larger {font-size: 1.6rem;}
+    .travelSmart[class*="largest"], .mailList .largest {font-size: 1.85rem;}
+
+    .quote span[class*="regular"] {font-size: 1.125rem;}
+    .quote span[class*="larger"] {font-size: 1.4rem;}
+    .quote span[class*="largest"] {font-size: 1.65rem;}
 
     .optionsContainer {position: absolute; top: 0; right: 0; display: flex; padding: 10px; background: rgba(255, 255, 255, 0.5); gap: 10px;}
     .themeOption {padding: 11px 13px; cursor: pointer; border-radius: 0; background: #fff; border: 0; line-height: 1.3; font-family: 'Roboto', sans-serif;}
