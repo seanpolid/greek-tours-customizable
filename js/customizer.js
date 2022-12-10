@@ -2,42 +2,12 @@
 
 const customizer = {
 
-    fontSizeScalingMatrix : [],
-    uniqueFontSizes : [],
-    currentFontOption : 0, // 0, 1, 2 = small, medium, large
+    fontSizes : ["regular", "larger", "largest"],
+    currentFontSize : "regular",
     currentTheme : "light",
 
     init : function() {
-        this.fontSizeScalingMatrix = this.getFontSizeScalingMatrix();
-        this.uniqueFontSizes = this.getUniqueFontSizes();
         this.createControls();
-    },
-
-    getFontSizeScalingMatrix : function() {
-        /* This defines how font sizes (specified in rem) increase or decrease
-            based on the current font option (currentFontOption == col) */
-        const matrix = [[0.875, 1, 1.25],
-                        [1, 1.25, 1.5],
-                        [1.125, 1.4, 1.65],
-                        [1.375, 1.6, 1.85],
-                        [1.625, 1.85, 2.1],
-                        [2.125, 2.25, 2.5],
-                        [2.5, 2.75, 3]]
-        return matrix;
-    },
-
-    getUniqueFontSizes : function() {
-        /* Creates a sorted array (asc) of unique font sizes where the index + 1 
-            corresponds to a given class in main.css. 
-            Ex: .fontSize1 == uniqueFontSizes[0] */
-        let allFontSizes = [];
-        for (const row of this.fontSizeScalingMatrix) {
-            for (const fontSize of row) {
-                allFontSizes.push(fontSize);
-            }
-        }
-        const uniqueFontSizes = new Set(allFontSizes.sort());
-        return Array.from(uniqueFontSizes);
     },
 
     createControls : function() {
@@ -49,7 +19,7 @@ const customizer = {
         optionsContainer.setAttribute("aria-hidden", "true");
 
         const themeOption = this.createThemeOption();
-        const fontSizeOptions = this.createFontSizeOptions();
+        const fontSizeOptions = this.createFontOptions();
         
         optionsContainer.append(themeOption, fontSizeOptions);
         mainContainer.insertBefore(optionsContainer, header);
@@ -60,7 +30,7 @@ const customizer = {
         themeOption.setAttribute("type", "button");
         themeOption.setAttribute("value", "Dark Theme");
         themeOption.addEventListener('click', this.changeTheme, false);
-        themeOption.classList.add("themeOption", "fontSize1");
+        themeOption.classList.add("themeOption", "regular");
         return themeOption;
     },
 
@@ -84,27 +54,28 @@ const customizer = {
         customizer.currentTheme = newTheme;
     },
 
-    createFontSizeOptions : function() {
-        let fontSizeOptions = document.createElement("div");
-        fontSizeOptions.classList.add("fontSizeOptions")
+    createFontOptions : function() {
+        let fontOptions = document.createElement("div");
+        fontOptions.classList.add("fontSizeOptions")
 
-        const smallFontOption = customizer.createFontSizeOption('Regular Text Size', 'smallFontOption', 0.875);
-        const mediumFontOption = customizer.createFontSizeOption('Larger Text Size', 'mediumFontOption', 1);
-        const largeFontOption = customizer.createFontSizeOption('Largest Text Size', 'largeFontOption', 1.125);
+        const smallFontOption = customizer.createFontOption('Regular Text Size', 'regularFontOption');
+        const mediumFontOption = customizer.createFontOption('Larger Text Size', 'largerFontOption');
+        const largeFontOption = customizer.createFontOption('Largest Text Size', 'largestFontOption');
 
         smallFontOption.classList.add("selected");
 
-        fontSizeOptions.addEventListener('click', this.selectFontSizeOption, false);
-        fontSizeOptions.addEventListener('click', this.resizeFonts, false);
-        fontSizeOptions.append(smallFontOption, mediumFontOption, largeFontOption);
-        return fontSizeOptions;
+        fontOptions.addEventListener('click', this.selectFontSizeOption, false);
+        fontOptions.addEventListener('click', this.resizeFonts, false);
+        fontOptions.append(smallFontOption, mediumFontOption, largeFontOption);
+        return fontOptions;
     },
 
-    createFontSizeOption : function(title, classIdentifier, fontSize) {
+    createFontOption : function(title, classIdentifier) {
         let fontSizeOption = document.createElement("a");
         fontSizeOption.appendChild(document.createTextNode("A"));
         fontSizeOption.setAttribute("href", "#");
-        fontSizeOption.classList.add(this.convertToStyle(fontSize), classIdentifier);
+        fontSizeOption.setAttribute("title", title);
+        fontSizeOption.classList.add(classIdentifier, "regular");
         fontSizeOption.addEventListener('click', event => {
             event.preventDefault();
         }, false);
@@ -116,72 +87,37 @@ const customizer = {
         if (selectedFontSizeOption) {
             selectedFontSizeOption.classList.remove("selected");
         }
-        if (customizer.getNewFontOption(event) !== undefined) {
+        if (customizer.getNewFontSize(event) !== undefined) {
             event.target.classList.add("selected");
         }
     },
 
     resizeFonts : function(event) {
-        const newFontOption = customizer.getNewFontOption(event);
-        if (newFontOption == undefined || newFontOption === customizer.currentFontOption) {
+        const currentFontSize = customizer.currentFontSize;
+        const newFontSize = customizer.getNewFontSize(event);
+        console.log(newFontSize);
+        if (newFontSize == undefined || newFontSize === currentFontSize) {
             return;
         }
  
-        const elementsToAdjust = document.querySelectorAll("[class*=fontSize]");
+        const elementsToAdjust = document.querySelectorAll(`.${currentFontSize}`);
         for (const element of elementsToAdjust) {
-            const currentStyle = customizer.getCurrentStyle(element);
-            if (currentStyle) {
-                const newStyle = customizer.getNewStyle(currentStyle, newFontOption);
-                element.classList.remove(currentStyle);
-                element.classList.add(newStyle);
-            } 
+            element.classList.remove(currentFontSize);
+            element.classList.add(newFontSize);
         }
-        customizer.currentFontOption = newFontOption;
+        customizer.currentFontSize = newFontSize;
     },
 
-    getNewFontOption : function(event) {
+    getNewFontSize : function(event) {
         const targetClassList = event.target.classList;
-        if (targetClassList.contains("smallFontOption")) {
-            return 0;
-        } else if (targetClassList.contains("mediumFontOption")) {
-            return 1;
-        } else if (targetClassList.contains("largeFontOption")) {
-            return 2;
+        if (targetClassList.contains("regularFontOption")) {
+            return "regular";
+        } else if (targetClassList.contains("largerFontOption")) {
+            return "larger";
+        } else if (targetClassList.contains("largestFontOption")) {
+            return "largest";
         } 
     },
-
-    getCurrentStyle : function(element) {
-        for (const style of element.classList) {
-            if (style.includes("fontSize") && !style.includes("fontSizeOptions")) {
-                return style;
-            }
-        }
-        return undefined;
-    },
-
-    getNewStyle : function(currentStyle, newFontOption) {
-        const currentFontSize = customizer.findCurrentFontSize(currentStyle);
-        const nextFontSize = customizer.findNextFontSize(currentFontSize, newFontOption);
-        return customizer.convertToStyle(nextFontSize);
-    },
-
-    findCurrentFontSize : function(currentSize) {
-        const fontSizeIndex = parseInt(currentSize.split("fontSize")[1]) - 1;
-        return customizer.uniqueFontSizes[fontSizeIndex];
-    },
-
-    findNextFontSize : function(currentFontSize, newFontOption) {
-        for (const row of customizer.fontSizeScalingMatrix) {
-            if (row[customizer.currentFontOption] === currentFontSize) {
-                return row[newFontOption];
-            }
-        }
-    },
-
-    convertToStyle : function(nextFontSize) {
-        const fontSizeIndex = customizer.uniqueFontSizes.indexOf(nextFontSize);
-        return `fontSize${fontSizeIndex + 1}`;
-    }
     
 }
 
