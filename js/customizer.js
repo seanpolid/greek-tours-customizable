@@ -2,7 +2,6 @@
 
 const customizer = {
 
-    fontSizes : ["regular", "larger", "largest"],
     currentFontSize : "regular",
     currentTheme : "light",
 
