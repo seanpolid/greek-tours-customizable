@@ -2,6 +2,7 @@
 
 const customizer = {
 
+    body : document.querySelector("body"),
     currentFontSize : "regular",
     currentTheme : "light",
 
@@ -45,11 +46,8 @@ const customizer = {
         }
         document.querySelector(".themeOption").setAttribute("value", newValue);
         
-        const elementsToAdjust = document.querySelectorAll("[class*=light], [class*=dark]");
-        for (let element of elementsToAdjust) {
-            element.classList.remove(customizer.currentTheme);
-            element.classList.add(newTheme);
-        }
+        customizer.body.classList.remove(customizer.currentTheme);
+        customizer.body.classList.add(newTheme);
         customizer.currentTheme = newTheme;
     },
 
@@ -98,9 +96,8 @@ const customizer = {
             return;
         }
  
-        const elementToAdjust = document.querySelector(`.${currentFontSize}`);
-        elementToAdjust.classList.remove(currentFontSize);
-        elementToAdjust.classList.add(newFontSize);
+        customizer.body.classList.remove(currentFontSize);
+        customizer.body.classList.add(newFontSize);
         customizer.currentFontSize = newFontSize;
     },
 
