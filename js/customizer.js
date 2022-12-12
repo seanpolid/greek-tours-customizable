@@ -19,9 +19,9 @@ const customizer = {
         optionsContainer.setAttribute("aria-hidden", "true");
 
         const themeOption = this.createThemeOption();
-        const fontSizeOptions = this.createFontOptions();
+        const fontOptions = this.createFontOptions();
         
-        optionsContainer.append(themeOption, fontSizeOptions);
+        optionsContainer.append(themeOption, fontOptions);
         mainContainer.insertBefore(optionsContainer, header);
     },
 
@@ -52,7 +52,7 @@ const customizer = {
 
     createFontOptions : function() {
         let fontOptions = document.createElement("div");
-        fontOptions.classList.add("fontSizeOptions")
+        fontOptions.classList.add("fontOptions")
 
         const smallFontOption = customizer.createFontOption('Regular Text Size', 'regularFontOption');
         const mediumFontOption = customizer.createFontOption('Larger Text Size', 'largerFontOption');
@@ -60,28 +60,28 @@ const customizer = {
 
         smallFontOption.classList.add("selected");
 
-        fontOptions.addEventListener('click', this.selectFontSizeOption, false);
+        fontOptions.addEventListener('click', this.selectFontOption, false);
         fontOptions.addEventListener('click', this.resizeFonts, false);
         fontOptions.append(smallFontOption, mediumFontOption, largeFontOption);
         return fontOptions;
     },
 
     createFontOption : function(title, classIdentifier) {
-        let fontSizeOption = document.createElement("a");
-        fontSizeOption.appendChild(document.createTextNode("A"));
-        fontSizeOption.setAttribute("href", "#");
-        fontSizeOption.setAttribute("title", title);
-        fontSizeOption.classList.add(classIdentifier);
-        fontSizeOption.addEventListener('click', event => {
+        let fontOption = document.createElement("a");
+        fontOption.appendChild(document.createTextNode("A"));
+        fontOption.setAttribute("href", "#");
+        fontOption.setAttribute("title", title);
+        fontOption.classList.add(classIdentifier);
+        fontOption.addEventListener('click', event => {
             event.preventDefault();
         }, false);
-        return fontSizeOption;
+        return fontOption;
     },
 
-    selectFontSizeOption : function(event) {
-        const selectedFontSizeOption = document.querySelector(".selected");
-        if (selectedFontSizeOption) {
-            selectedFontSizeOption.classList.remove("selected");
+    selectFontOption : function(event) {
+        const selectedFontOption = document.querySelector(".selected");
+        if (selectedFontOption) {
+            selectedFontOption.classList.remove("selected");
         }
         if (customizer.getNewFontSize(event) !== undefined) {
             event.target.classList.add("selected");

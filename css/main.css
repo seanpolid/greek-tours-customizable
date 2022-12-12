@@ -58,9 +58,9 @@
     .themeOption, .regularFontOption {font-size: inherit;}
     .themeOption {padding: 11px 13px; cursor: pointer; border-radius: 0; background: #fff; border: 0; line-height: 1.3; font-family: 'Roboto', sans-serif;}
     .themeOption:hover, .themeOption:focus {color: #fff; background: #000;}
-    .fontSizeOptions {display: flex; padding: 0; margin: 0; gap: 10px; justify-content: space-between; align-items: center;}
-    .fontSizeOptions a {padding: 0 5px; color: #000; cursor: pointer;}
-    .fontSizeOptions a:focus {outline-offset: 0;}
+    .fontOptions {display: flex; padding: 0; margin: 0; gap: 10px; justify-content: space-between; align-items: center;}
+    .fontOptions a {padding: 0 5px; color: #000; cursor: pointer;}
+    .fontOptions a:focus {outline-offset: 0;}
     .selected, .selected:focus {outline: 2px solid #000;}
 
     /* General */
