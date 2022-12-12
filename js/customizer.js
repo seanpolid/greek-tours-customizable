@@ -35,7 +35,6 @@ const customizer = {
     },
 
     changeTheme : function() {
-        console.log("Changing theme");
         let newTheme, newValue;
         if (customizer.currentTheme === 'light') {
             newTheme = "dark";
