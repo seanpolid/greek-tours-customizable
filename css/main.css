@@ -21,19 +21,27 @@
     .larger {font-size: 1rem;}
     .larger h1 {font-size: 2.75rem;}
     .larger header form, .larger .tours h2, .larger .largerFontOption {font-size: 1.25rem;}
+    .larger .tours {padding-bottom: 96px;}
     .larger .exploreCafe h2 {font-size: 1.85rem;}
     .larger .quote span, .larger  .largestFontOption {font-size: 1.4rem;}
     .larger .quote, .larger .travelSmart h2 {font-size: 2.25rem;}
     .larger .travelSmart a, .larger .mailList h2 {font-size: 1.6rem;}
+    .larger .greekToursNav h2 {margin: 2px 0 0 5px;}
+    .larger ul {margin-top: 15px;}
+    .larger .mailList {margin-top: 2px;}
+    .larger footer aside p {margin-top: -10px;}
 
     /* Largest font */
     .largest {font-size: 1.25rem;}
     .largest h1{font-size: 3rem;}
     .largest header form, .largest .tours h2, .largest .largerFontOption {font-size: 1.5rem;}
+    .largest .tours {padding-bottom: 107px;}
     .largest .exploreCafe h2 {font-size: 2.1rem;}
     .largest .quote span, .largest .largestFontOption {font-size: 1.65rem;}
     .largest .quote, .largest .travelSmart h2 {font-size: 2.5rem;}
     .largest .travelSmart a, .largest .mailList h2 {font-size: 1.85rem;}
+    .largest footer aside p {margin-top: -32px;}
+    .largest #emailButton {margin-top: 20px;}
 
     /* Color theme */
     .light {background: #fff;}
