@@ -26,7 +26,7 @@
     .larger .quote span, .larger  .largestFontOption {font-size: 1.4rem;}
     .larger .quote, .larger .travelSmart h2 {font-size: 2.25rem;}
     .larger .travelSmart a, .larger .mailList h2 {font-size: 1.6rem;}
-    .larger .greekToursNav h2 {margin: 2px 0 0 5px;}
+    .larger .greekToursNav h2 {margin-top: 2px;}
     .larger ul {margin-top: 15px;}
     .larger .mailList {margin-top: 2px;}
     .larger footer aside p {margin-top: -10px;}
@@ -126,7 +126,7 @@
 
 }
 
-@media screen and (max-width: 1010px) {
+@media screen and (max-width: 1018px) {
 
     /* Theme & font-size option containers */
     .themeOption {display: none;}
@@ -145,7 +145,6 @@
     .travelSmart a {padding-left: 0; padding-right: 0;}
 
 }
-
 
 @media screen and (max-width: 800px) {
 
